@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/mongoDB/mongoDB.iml" filepath="$PROJECT_DIR$/mongoDB/mongoDB.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yy-framework-common/yy-framework-common.iml" filepath="$PROJECT_DIR$/yy-framework-common/yy-framework-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yy-framework-model/yy-framework-model.iml" filepath="$PROJECT_DIR$/yy-framework-model/yy-framework-model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yy-framework-utils/yy-framework-utils.iml" filepath="$PROJECT_DIR$/yy-framework-utils/yy-framework-utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yy-parent.iml" filepath="$PROJECT_DIR$/yy-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yy-service-api/yy-service-api.iml" filepath="$PROJECT_DIR$/yy-service-api/yy-service-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yy-service-manage-cms/yy-service-manage-cms.iml" filepath="$PROJECT_DIR$/yy-service-manage-cms/yy-service-manage-cms.iml" />
+    </modules>
+  </component>
+</project>
