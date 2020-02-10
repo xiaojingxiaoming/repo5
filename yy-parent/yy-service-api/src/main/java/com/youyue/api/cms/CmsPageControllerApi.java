@@ -4,6 +4,7 @@ import com.youyue.framework.domain.cms.CmsPage;
 import com.youyue.framework.domain.cms.request.QueryPageRequest;
 import com.youyue.framework.domain.cms.response.CmsPageResult;
 import com.youyue.framework.model.response.QueryResponseResult;
+import com.youyue.framework.model.response.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -23,4 +24,14 @@ public interface CmsPageControllerApi {
     //新增页面
     @ApiOperation("新增页面")
     public CmsPageResult add(CmsPage cmsPage);
+    //根据页面id查询页面信息
+    @ApiOperation("根据id查询页面")
+    public CmsPage findById(String id);
+    //修改页面
+    @ApiOperation("修改页面")
+    public CmsPageResult edit(String id,CmsPage cmsPage);
+
+    //删除页面
+    @ApiOperation("删除页面")
+    public ResponseResult delete(String id);
 }

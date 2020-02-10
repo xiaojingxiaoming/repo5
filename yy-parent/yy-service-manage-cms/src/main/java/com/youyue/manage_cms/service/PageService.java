@@ -2,15 +2,22 @@ package com.youyue.manage_cms.service;
 
 import com.youyue.framework.domain.cms.CmsPage;
 import com.youyue.framework.domain.cms.request.QueryPageRequest;
+import com.youyue.framework.domain.cms.response.CmsCode;
 import com.youyue.framework.domain.cms.response.CmsPageResult;
+import com.youyue.framework.exception.CustomException;
+import com.youyue.framework.exception.ExceptionCast;
 import com.youyue.framework.model.response.CommonCode;
 import com.youyue.framework.model.response.QueryResponseResult;
 import com.youyue.framework.model.response.QueryResult;
+import com.youyue.framework.model.response.ResponseResult;
 import com.youyue.manage_cms.dao.CmsPageRepository;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
 @Service
 public class PageService {
 
@@ -66,10 +73,9 @@ public class PageService {
     }
 
     //新增页面
-    public CmsPageResult add(CmsPage cmsPage){
-       //校验页面名称  站点id 页面webpath的唯一性
+   /* public CmsPageResult add(CmsPage cmsPage){
+        //校验页面名称  站点id 页面webpath的唯一性
         //根据页面名称  站点id 页面webpath去cmsPage集合中查询 查到说明已经存在 查不到在继续添加
-
         CmsPage cmsPage1 = cmsPageRepository.findByPageNameAndSiteIdAndPageWebPath(cmsPage.getPageName(), cmsPage.getSiteId(), cmsPage.getPageWebPath());
         if (cmsPage1==null){//没有查询到 可以完成添加
             //调用dao的新增页面
@@ -79,5 +85,63 @@ public class PageService {
         }
         //新增失败
         return new CmsPageResult(CommonCode.FAIL,null);
+    }*/
+    public CmsPageResult add(CmsPage cmsPage){
+        int i=1/0;
+        if(cmsPage==null){
+            //抛出异常  非法参数异常
+            ExceptionCast.cast(CommonCode.FAIL);
+        }
+        //校验页面名称  站点id 页面webpath的唯一性
+        //根据页面名称  站点id 页面webpath去cmsPage集合中查询 查到说明已经存在 查不到在继续添加
+        CmsPage cmsPage1 = cmsPageRepository.findByPageNameAndSiteIdAndPageWebPath(cmsPage.getPageName(), cmsPage.getSiteId(), cmsPage.getPageWebPath());
+        if (cmsPage1!=null){//没有查询到 可以完成添加
+            //页面已经存在
+            //抛出异常  别人铺获  在给客户端提示
+            ExceptionCast.cast(CmsCode.CMS_ADDPAGE_EXISTSNAME);
+        }
+        //调用dao的新增页面
+        cmsPage.setPageId(null);//这样设置 MongoDB肯定会帮我们创建主键
+        cmsPageRepository.save(cmsPage);
+        return new CmsPageResult(CommonCode.SUCCESS,cmsPage);
+    }
+    //根据页面id查询页面
+    public CmsPage getById(String id){
+        Optional<CmsPage> optional = cmsPageRepository.findById(id);
+        if (optional.isPresent()){
+            CmsPage cmsPage = optional.get();
+            return cmsPage;
+        }
+        return null;
+    }
+    //修改页面
+    public CmsPageResult update(String id,CmsPage cmsPage){
+        //根据页面id查询页面
+        CmsPage cmsPage1 = this.getById(id);
+        if (cmsPage1!=null){
+            //准备更新数据
+            //设置修改的数据
+            cmsPage1.setTemplateId(cmsPage.getTemplateId());
+            cmsPage1.setSiteId(cmsPage.getSiteId());
+            cmsPage1.setPageAliase(cmsPage.getPageAliase());
+            cmsPage1.setPageName(cmsPage.getPageName());
+            cmsPage1.setPageWebPath(cmsPage.getPageWebPath());
+            cmsPage1.setPagePhysicalPath(cmsPage.getPagePhysicalPath());
+          //提交修改
+            cmsPageRepository.save(cmsPage1);
+            return new CmsPageResult(CommonCode.SUCCESS,cmsPage1);
+        }
+        //修改失败
+        return new CmsPageResult(CommonCode.FAIL,null);
+    }
+    //根据id删除页面
+    public ResponseResult delete(String id){
+        //先根据id查询cmsPage对象
+        Optional<CmsPage> optional = cmsPageRepository.findById(id);
+        if(optional.isPresent()){
+            cmsPageRepository.deleteById(id);
+            return new ResponseResult(CommonCode.SUCCESS);
+        }
+        return new ResponseResult(CommonCode.FAIL);
     }
 }
