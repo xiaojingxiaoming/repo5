@@ -12,6 +12,7 @@
         <module>yy-framework-model</module>
         <module>yy-service-api</module>
         <module>yy-framework-common</module>
+        <module>test-freemarker</module>
         <module>mongoDB</module>
         <module>yy-service-manage-cms</module>
     </modules>

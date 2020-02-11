@@ -1,5 +1,6 @@
 package com.youyue.manage_cms.service;
 
+import com.youyue.framework.domain.cms.CmsConfig;
 import com.youyue.framework.domain.cms.CmsPage;
 import com.youyue.framework.domain.cms.request.QueryPageRequest;
 import com.youyue.framework.domain.cms.response.CmsCode;
@@ -10,11 +11,13 @@ import com.youyue.framework.model.response.CommonCode;
 import com.youyue.framework.model.response.QueryResponseResult;
 import com.youyue.framework.model.response.QueryResult;
 import com.youyue.framework.model.response.ResponseResult;
+import com.youyue.manage_cms.dao.CmsConfigRepository;
 import com.youyue.manage_cms.dao.CmsPageRepository;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Optional;
 
@@ -23,6 +26,10 @@ public class PageService {
 
     @Autowired
     CmsPageRepository cmsPageRepository;
+    @Autowired
+    CmsConfigRepository cmsConfigRepository;
+    @Autowired
+    RestTemplate restTemplate;
 
     /**
      *
@@ -87,7 +94,7 @@ public class PageService {
         return new CmsPageResult(CommonCode.FAIL,null);
     }*/
     public CmsPageResult add(CmsPage cmsPage){
-        int i=1/0;
+       // int i=1/0;
         if(cmsPage==null){
             //抛出异常  非法参数异常
             ExceptionCast.cast(CommonCode.FAIL);
@@ -143,5 +150,15 @@ public class PageService {
             return new ResponseResult(CommonCode.SUCCESS);
         }
         return new ResponseResult(CommonCode.FAIL);
+    }
+    //根据id查询cmsConfig
+    public CmsConfig getConfigById(String id){
+        Optional<CmsConfig> optional = cmsConfigRepository.findById(id);
+        if(optional.isPresent()){
+            //如果不为空  表示查询到了数据模型
+            CmsConfig cmsConfig = optional.get();
+            return cmsConfig;
+        }
+        return null;
     }
 }

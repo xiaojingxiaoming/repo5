@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/mongoDB/mongoDB.iml" filepath="$PROJECT_DIR$/mongoDB/mongoDB.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test-freemarker/test-freemarker.iml" filepath="$PROJECT_DIR$/test-freemarker/test-freemarker.iml" />
       <module fileurl="file://$PROJECT_DIR$/yy-framework-common/yy-framework-common.iml" filepath="$PROJECT_DIR$/yy-framework-common/yy-framework-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/yy-framework-model/yy-framework-model.iml" filepath="$PROJECT_DIR$/yy-framework-model/yy-framework-model.iml" />
       <module fileurl="file://$PROJECT_DIR$/yy-framework-utils/yy-framework-utils.iml" filepath="$PROJECT_DIR$/yy-framework-utils/yy-framework-utils.iml" />
